@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Traveller } = require("../../models");
+const { Traveller, Trip, Location } = require("../../models");
 
 router.get("/", async (req, res) => {
   //returns all traveller data
@@ -24,12 +24,27 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  //
+  //returns a single traveller's data and any associated trip data
   try {
     const travellerData = await Traveller.findByPk(req.pararms.id, {
       where: {
         id: req.params.id,
       },
+      include: [
+        {
+          model: Trip,
+          where: {
+            traveller_id: req.params.id,
+          },
+        },
+        {
+          model: Location,
+          attributes: ["name"],
+          where: {
+            traveller_id: req.params.id,
+          },
+        },
+      ],
     });
 
     if (!travellerData) {
@@ -46,7 +61,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  //
+  //deletes traveller based on provided id
   try {
     const travellerData = await Traveller.destroy({
       where: {

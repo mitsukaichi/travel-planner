@@ -5,7 +5,7 @@ router.get("/", async (req, res) => {
   //returns all location data
   try {
     const locationData = await Location.findAll({
-      include: [{ model: Trip }],
+      include: [{ model: Location }],
     });
     res.status(200).json(locationData);
   } catch (err) {
