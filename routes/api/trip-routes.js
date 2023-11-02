@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Trip, Location, Traveller } = require("../../models");
+const { Trip } = require("../../models");
 
 router.post("/", async (req, res) => {
   //creates trip data between associated travellers and locations
@@ -24,6 +24,7 @@ router.delete("/:id", async (req, res) => {
       res
         .status(404)
         .json({ message: "Error: No trip associated with the provided id" });
+      return;
     }
 
     res.status(200).json(tripData);
