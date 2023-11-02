@@ -1,7 +1,12 @@
 //import ModelsTr
 const Traveller = require('./Traveller');
-const Locations = require('./Locations');
-// const Trip = require('./Trip');
+const Location = require('./Location');
+const Trip = require('./Trip');
 
 //travellers have many locations
-Traveller.hasMany(Locations);
+Traveller.hasMany(Location);
+
+//locations have many travellers through trips
+
+// Location.hasMany(Traveller, {through: Trip });
+Location.belongsToMany(Traveller, {through: Trip });
