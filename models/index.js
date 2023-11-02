@@ -10,3 +10,9 @@ Traveller.hasMany(Location);
 
 // Location.hasMany(Traveller, {through: Trip });
 Location.belongsToMany(Traveller, {through: Trip });
+
+module.exports = {
+    Traveller,
+    Location,
+    Trip
+}
