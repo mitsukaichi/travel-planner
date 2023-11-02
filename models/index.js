@@ -9,9 +9,9 @@ const Trip = require('./Trip');
 //locations have many travellers through trips
 
 // Location.hasMany(Traveller, {through: Trip });
-Location.belongsToMany(Traveller, {through: Trip });
+Location.belongsToMany(Traveller, {through: {model: Trip, unique: false} });
 
-Traveller.belongsToMany(Location, {through: Trip });
+Traveller.belongsToMany(Location, {through: {model: Trip, unique: false} });
 
 module.exports = {
     Traveller,
